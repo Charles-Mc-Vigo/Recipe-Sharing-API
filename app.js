@@ -4,9 +4,6 @@ const path = require('path');
 const app = express();
 app.use(express.json());
 
-// Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
-
 // Path to the data folder
 const dataFolderPath = path.join(__dirname, 'data');
 // Path to the breakfast.json file
@@ -109,17 +106,17 @@ app.delete('/api/breakfast/:name', (req, res) => {
 });
 
 
-//lunch
+//lunch - Kenneth
 app.get('/api/lunch', (req, res) => {
     res.send('You are in the LUNCH route');
 });
 
-//dinner
+//dinner - Myca
 app.get('/api/dinner', (req, res) => {
     res.send('You are in the DINNER route');
 });
 
-//dessert
+//dessert - Johanna
 app.get('/api/dessert', (req, res) => {
     res.send('You are in the DESSERT route');
 });
