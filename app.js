@@ -8,9 +8,36 @@ app.use(express.json());
 const dataFolderPath = path.join(__dirname, 'data');
 // Path to the breakfast.json file
 const breakfastFilePath = path.join(dataFolderPath, 'breakfast.json');
+// User authentication function (just an example, you may use a database for real-world implementation)
+function authenticateUser(username, password) {
+    // Check if username and password are valid
+    // This could be replaced with a database query or any other authentication method
+    return username === 'admin' && password === 'admin';
+}
+
+// Middleware for user validation
+function validateUser(req, res, next) {
+    const { username, password } = req.headers;
+
+    // Check if username and password are provided in the request headers
+    if (!username || !password) {
+        return res.status(401).send('Authentication required. Please provide username and password.');
+    }
+
+    // Authenticate user
+    if (!authenticateUser(username, password)) {
+        return res.status(401).send('Invalid username or password.');
+    }
+
+    // If user is validated, proceed to the next middleware or route handler
+    next();
+}
+app.get('/',(req,res)=>{
+    res.send("RECIPE SHARING API");
+});
 
 // Route to get breakfast recipes
-app.get('/api/breakfast', (req, res) => {
+app.get('/api/breakfast',validateUser, (req, res) => {
     // Read the breakfast.json file
     fs.readFile(breakfastFilePath, 'utf8', (err, data) => {
         if (err) {
@@ -31,7 +58,7 @@ app.get('/api/breakfast', (req, res) => {
 });
 
 // Route to add a new recipe to breakfast.json file
-app.post('/api/breakfast/addNewRecipe', (req, res) => {
+app.post('/api/breakfast/addNewRecipe', validateUser,(req, res) => {
     // Read the existing recipes
     fs.readFile(breakfastFilePath, 'utf8', (err, data) => {
         if (err) {
@@ -46,6 +73,10 @@ app.post('/api/breakfast/addNewRecipe', (req, res) => {
 
             // Add the new recipe to the array
             const newRecipe = req.body;
+            if (!newRecipe.name || !newRecipe.ingredients || !newRecipe.instructions) {
+                return res.status(400).send('Incomplete recipe data. Please provide name, ingredients, and instructions.');
+            }            
+
             breakfastRecipes.push(newRecipe);
 
             // Write the updated recipes back to the file
@@ -55,7 +86,7 @@ app.post('/api/breakfast/addNewRecipe', (req, res) => {
                     res.status(500).send('Error writing breakfast recipes');
                     return;
                 }
-                res.status(201).send('Recipe added to breakfast recipes successfully');
+                res.status(201).send(`${newRecipe.name} added to breakfast recipes successfully`);
             });
         } catch (error) {
             console.error('Error parsing breakfast.json:', error);
@@ -63,8 +94,10 @@ app.post('/api/breakfast/addNewRecipe', (req, res) => {
         }
     });
 });
+
+
 // Route to delete a recipe by its name
-app.delete('/api/breakfast/:name', (req, res) => {
+app.delete('/api/breakfast/:name',validateUser, (req, res) => {
     const recipeName = req.params.name;
 
     // Read the existing recipes
@@ -96,7 +129,7 @@ app.delete('/api/breakfast/:name', (req, res) => {
                     res.status(500).send('Error writing breakfast recipes');
                     return;
                 }
-                res.send(deletedRecipe);
+                res.send(`Recipe "${deletedRecipe.name}" deleted successfully!`);
             });
         } catch (error) {
             console.error('Error parsing breakfast.json:', error);
