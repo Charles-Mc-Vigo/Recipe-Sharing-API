@@ -19,8 +19,31 @@ app.get('/api/lunch',(req,res)=>{
 })
 
 //dinner
-app.get('/api/dinner',(req,res)=>{
-    res.send('You are in the DINNER route')
+
+// path folder
+const dataFolderPath = path.join(__dirname, 'data');
+const DinnerFilePath = path.join(dataFolderPath, 'Dinner.json');
+
+// Define the route handler
+app.get('/api/dinner', (req, res) => {
+
+    res.send('You are in the Dinner route');
+
+    const buttonHtml = '<a href="/api/dinner/dinner_Menu"><button>View Dinner Menu</button></a>';
+    
+});
+app.get ('/api/dinner/dinner_Menu',(req,res)=>{
+    fs.readFile(DinnerFilePath, 'utf-8', (err, data) => {
+        if (err) {
+            console.error('Error reading Dinner file');
+            res.status(500).send('Error loading dinner recipe...');
+            return;
+        }
+
+        // Send the response with the file contents
+        res.send(data);
+    });
+
 })
 
 //dessert

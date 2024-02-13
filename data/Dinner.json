@@ -1,0 +1,45 @@
+[
+    {
+      "name": "Sinigang na Baboy",
+      "category": "Dinner",
+      "ingredients": [
+        "Pork",
+        "Kamatis",
+        "Sibuyas",
+        "Radish",
+        "Sitaw",
+        "Sinigang Mix Original"
+
+      ],
+      "instructions": "1. Hugasan ang baboy at ang mga gulay.\n 2. Mag pa kulo ng tubig sa kaldero at ilagay ang kamatis at sibuyas . \n 3. Pag kumulo na ang tubig ilagay ang baboy at hintayin itong lumambot, pag malambot na ang baboy ilagay ang radish at sitaw. \n 4. Ilagay and Sinigang Mix at timplahana ayon sa panlasa. \n 5. I served at kumain na."
+    },
+    {
+      "name": "",
+      "category": "",
+      "ingredients": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "p"
+      ],
+      "instructions": ""
+    },
+    {
+      "name": "Avocado Toast",
+      "category": "breakfast",
+      "ingredients": [
+        "2 ripes avocade",
+        "4 slices of your favorite bread (whole wheat, sourdough, etc.)",
+        "Salt and pepper to taste",
+        "Red pepper flakes (optional)",
+        "Lemon juice (optional)",
+        "Olive oil (optional)",
+        "Optional toppings: sliced tomatoes, microgreens, crumbled feta cheese, etc."
+      ],
+      "instructions": "Cut the avocados in half, remove the pit, and scoop out the flesh into a bowl.Mash the avocado with a fork until you achieve your desired consistency.Season with salt, pepper, and a splash of lemon juice to taste. You can also add a pinch of red pepper flakes for some heat.Toast the bread slices until golden brown and crispy.Spread the mashed avocado evenly onto each slice of toast."
+    }
+  ]
