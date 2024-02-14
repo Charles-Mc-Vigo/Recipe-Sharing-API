@@ -1,0 +1,73 @@
+[
+  {
+    "recipeId": 1,
+    "name": "Sinigang na Baboy",
+    "category": "Dinner",
+    "ingredients": [
+      "Pork",
+      "Kamatis",
+      "Sibuyas",
+      "Radish",
+      "Sitaw",
+      "Sinigang Mix Original"
+    ],
+    "instructions": "1. Hugasan ang baboy at ang mga gulay.\n 2. Mag pa kulo ng tubig sa kaldero at ilagay ang kamatis at sibuyas . \n 3. Pag kumulo na ang tubig ilagay ang baboy at hintayin itong lumambot, pag malambot na ang baboy ilagay ang radish at sitaw. \n 4. Ilagay and Sinigang Mix at timplahana ayon sa panlasa. \n 5. I served at kumain na."
+  },
+  {
+    "recipeId": 2,
+    "name": "Chicken Adobo",
+    "category": "Dinner",
+    "ingredients": [
+      "1 kg chicken pieces (legs, thighs, or a whole chicken, cut into serving pieces)",
+      "1/2 cup soy sauce",
+      "1/2 cup vinegar (preferably cane vinegar)",
+      "4 cloves garlic, minced",
+      "1 onion, chopped",
+      "3 bay leaves",
+      "1 teaspoon whole peppercorns",
+      "1 tablespoon cooking oil",
+      "1 cup water",
+      "Salt, to taste",
+      "Steamed rice, for serving"
+    ],
+    "instructions": "1. **Marinate the Chicken:**\n   - In a large bowl, combine the soy sauce, vinegar, minced garlic, chopped onion, bay leaves, and whole peppercorns.\n   - Add the chicken pieces to the marinade, making sure they are well coated.\n   - Cover the bowl and let the chicken marinate in the refrigerator for at least 30 minutes to 1 hour. Marinating overnight will yield better flavor.\n\n2. **Cook the Chicken:**\n   - Heat the cooking oil in a large skillet or pot over medium heat.\n   - Once the oil is hot, add the marinated chicken pieces (reserve the marinade) and cook until lightly browned on all sides, about 5-7 minutes.\n   - Pour in the marinade and add the water.\n   - Bring the mixture to a boil, then reduce the heat to low. Cover the pot and let the chicken simmer for about 30-40 minutes or until the chicken is tender and cooked through. Stir occasionally.\n   - Taste the sauce and adjust the seasoning with salt, if needed.\n\n3. **Serve:**\n   - Once the chicken is cooked, remove the bay leaves and transfer the chicken pieces to a serving plate.\n   - Serve the Chicken Adobo hot with steamed rice on the side.\n   - You can also spoon some of the sauce over the chicken and rice for added flavor.\n\nChicken Adobo is a classic Filipino dish known for its savory and tangy flavor. It's best enjoyed with steamed rice and perhaps a side of sautéed vegetables or a fresh salad."
+  },
+  {
+    "recipeId": 3,
+    "name": "Beef Caldereta",
+    "category": "Dinner",
+    "ingredients": [
+      "1 kg beef stew meat, cut into cubes",
+      "3 tablespoons cooking oil",
+      "1 onion, chopped",
+      "4 cloves garlic, minced",
+      "2 potatoes, peeled and cubed",
+      "1 carrot, peeled and sliced",
+      "1 red bell pepper, sliced",
+      "1 green bell pepper, sliced",
+      "1 cup tomato sauce",
+      "1/2 cup liver spread",
+      "1 cup beef broth",
+      "1 cup grated cheese",
+      "3 bay leaves",
+      "Salt and pepper, to taste",
+      "Chopped parsley, for garnish"
+    ],
+    "instructions": "1. **Brown the Beef:**\n   - In a large pot, heat the cooking oil over medium-high heat. Add the beef cubes and brown them on all sides. Remove the beef from the pot and set aside.\n\n2. **Saute the Aromatics:**\n   - In the same pot, sauté the chopped onion and minced garlic until softened and aromatic.\n\n3. **Cook the Vegetables:**\n   - Return the browned beef to the pot. Add the potatoes, carrots, red bell pepper, and green bell pepper.\n\n4. **Add the Sauces and Broth:**\n   - Pour in the tomato sauce, beef broth, and add the liver spread. Stir until well combined.\n\n5. **Simmer the Caldereta:**\n   - Add the bay leaves and season with salt and pepper to taste. Bring the mixture to a boil, then reduce the heat to low. Cover and simmer for about 1.5 to 2 hours or until the beef is tender and the sauce has thickened.\n\n6. **Add the Cheese:**\n   - Once the beef is tender, stir in the grated cheese until melted and well incorporated.\n\n7. **Serve:**\n   - Transfer the Beef Caldereta to a serving dish. Garnish with chopped parsley before serving.\n\nBeef Caldereta is a hearty Filipino stew that's perfect for family dinners or special occasions. Serve it with steamed rice or crusty bread for a satisfying meal."
+  },
+  {
+    "recipeId": 4,
+    "name": "Spaghetti Carbonara",
+    "category": "Dinner",
+    "ingredients": [
+      "Spaghetti pasta",
+      "Pancetta or bacon",
+      "Eggs",
+      "Parmesan cheese",
+      "Black pepper",
+      "Garlic",
+      "Olive oil"
+    ],
+    "instructions": "1. Cook spaghetti according to package instructions.\n2. In a skillet, cook pancetta or bacon until crispy. Add minced garlic and cook until fragrant.\n3. In a bowl, whisk together eggs, grated Parmesan cheese, and black pepper.\n4. Drain spaghetti and add to the skillet with pancetta and garlic. Remove from heat.\n5. Quickly pour the egg and cheese mixture over the hot spaghetti, tossing continuously to coat.\n6. Serve immediately with extra grated Parmesan cheese and black pepper."
+  }
+]
