@@ -3,15 +3,15 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 app.use(express.json());
+const { v4: uuidv4 } = require('uuid');
 
 // Path to the data folder
 const dataFolderPath = path.join(__dirname, 'data');
 // Path to the breakfast.json file
 const breakfastFilePath = path.join(dataFolderPath, 'breakfast.json');
-// User authentication function (just an example, you may use a database for real-world implementation)
+
 function authenticateUser(username, password) {
     // Check if username and password are valid
-    // This could be replaced with a database query or any other authentication method
     return username === 'admin' && password === 'admin';
 }
 
@@ -28,7 +28,6 @@ function validateUser(req, res, next) {
     if (!authenticateUser(username, password)) {
         return res.status(401).send('Invalid username or password.');
     }
-
     // If user is validated, proceed to the next middleware or route handler
     next();
 }
@@ -58,7 +57,7 @@ app.get('/api/breakfast',validateUser, (req, res) => {
 });
 
 // Route to add a new recipe to breakfast.json file
-app.post('/api/breakfast/addNewRecipe', validateUser,(req, res) => {
+app.post('/api/breakfast/addNewRecipe', validateUser, (req, res) => {
     // Read the existing recipes
     fs.readFile(breakfastFilePath, 'utf8', (err, data) => {
         if (err) {
@@ -70,14 +69,26 @@ app.post('/api/breakfast/addNewRecipe', validateUser,(req, res) => {
         try {
             // Parse the JSON data
             const breakfastRecipes = JSON.parse(data);
-
+            
             // Add the new recipe to the array
             const newRecipe = req.body;
-            if (!newRecipe.name || !newRecipe.ingredients || !newRecipe.instructions) {
-                return res.status(400).send('Incomplete recipe data. Please provide name, ingredients, and instructions.');
-            }            
+            
+            // Validate if all required fields are provided
+            if (!newRecipe.name || !newRecipe.category || !newRecipe.ingredients || !newRecipe.instructions) {
+                return res.status(400).send('Incomplete recipe data. Please provide name, category, ingredients, and instructions.');
+            }  
 
-            breakfastRecipes.push(newRecipe);
+            // Add the new recipe to the array with a unique id
+            newRecipe.id = uuidv4(); // Generate a unique id
+            
+            const reorderedRecipe = {
+                id: newRecipe.id,
+                name: newRecipe.name,
+                category: newRecipe.category,
+                ingredients: newRecipe.ingredients,
+                instructions: newRecipe.instructions
+            };
+            breakfastRecipes.push(reorderedRecipe);
 
             // Write the updated recipes back to the file
             fs.writeFile(breakfastFilePath, JSON.stringify(breakfastRecipes, null, 2), (err) => {
@@ -94,6 +105,8 @@ app.post('/api/breakfast/addNewRecipe', validateUser,(req, res) => {
         }
     });
 });
+
+
 
 
 // Route to delete a recipe by its name

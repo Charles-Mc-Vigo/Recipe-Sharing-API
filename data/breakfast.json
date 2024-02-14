@@ -1,1 +1,22 @@
-[]
+[
+    {
+        "id": "757dd4a4-1017-49cc-8abb-1cbfafaf5630",
+        "name": "Oatmeal with Fruit",
+        "category": "breakfast",
+        "ingredients": [
+            "oats",
+            "water",
+            "milk",
+            "honey",
+            "banana",
+            "blueberries"
+        ],
+        "instructions": [
+            "Bring water to a boil in a saucepan.",
+            "Add oats and reduce heat to low.",
+            "Cook for 5 minutes, stirring occasionally.",
+            "Stir in milk and cook for another 2 minutes.",
+            "Serve hot with sliced banana, blueberries, and a drizzle of honey."
+        ]
+    }
+]
