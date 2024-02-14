@@ -1,22 +1,24 @@
 [
     {
-        "id": "757dd4a4-1017-49cc-8abb-1cbfafaf5630",
-        "name": "Oatmeal with Fruit",
-        "category": "breakfast",
+        "id": "ba938e46-14cf-4b07-a61a-785746a5a168",
+        "name": "Veggie Egg Breakfast Wraps",
+        "category": "Breakfast",
         "ingredients": [
-            "oats",
-            "water",
-            "milk",
-            "honey",
-            "banana",
-            "blueberries"
+            "4 large eggs",
+            "1/4 cup diced onion",
+            "1/4 cup diced bell pepper",
+            "1/4 cup diced tomato",
+            "1/2 cup shredded cheddar cheese",
+            "4 small flour tortillas",
+            "Salt and pepper to taste"
         ],
         "instructions": [
-            "Bring water to a boil in a saucepan.",
-            "Add oats and reduce heat to low.",
-            "Cook for 5 minutes, stirring occasionally.",
-            "Stir in milk and cook for another 2 minutes.",
-            "Serve hot with sliced banana, blueberries, and a drizzle of honey."
+            "Sauté onion and bell pepper until softened.",
+            "Scramble eggs with vegetables until cooked.",
+            "Add tomato and cheese, melt together.",
+            "Warm tortillas.",
+            "Fill tortillas with egg mixture.",
+            "Roll up and serve."
         ]
     }
 ]
