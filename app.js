@@ -31,12 +31,13 @@ function validateUser(req, res, next) {
     // If user is validated, proceed to the next middleware or route handler
     next();
 }
-app.get('/',(req,res)=>{
+
+app.get('/', (req, res) => {
     res.send("RECIPE SHARING API");
 });
 
 // Route to get breakfast recipes
-app.get('/api/breakfast',validateUser, (req, res) => {
+app.get('/api/breakfast', validateUser, (req, res) => {
     // Read the breakfast.json file
     fs.readFile(breakfastFilePath, 'utf8', (err, data) => {
         if (err) {
@@ -49,6 +50,34 @@ app.get('/api/breakfast',validateUser, (req, res) => {
             // Parse the JSON data
             const breakfastRecipes = JSON.parse(data);
             res.json(breakfastRecipes);
+        } catch (error) {
+            console.error('Error parsing breakfast.json:', error);
+            res.status(500).send('Error parsing breakfast recipes');
+        }
+    });
+});
+
+app.get('/api/breakfast/:name', validateUser, (req, res) => {
+    const recipeName = req.params.name;
+    fs.readFile(breakfastFilePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading breakfast.json:', err);
+            res.status(500).send('Error reading breakfast recipes');
+            return;
+        }
+
+        try {
+            // Parse the JSON data
+            const breakfastRecipes = JSON.parse(data);
+
+            // Find the recipe with the given name
+            const recipe = breakfastRecipes.find(recipe => recipe.name === recipeName);
+
+            if (!recipe) {
+                return res.status(404).send('The recipe with the given name was not found.');
+            }
+            res.json(recipe);
+
         } catch (error) {
             console.error('Error parsing breakfast.json:', error);
             res.status(500).send('Error parsing breakfast recipes');
@@ -69,29 +98,25 @@ app.post('/api/breakfast/addNewRecipe', validateUser, (req, res) => {
         try {
             // Parse the JSON data
             const breakfastRecipes = JSON.parse(data);
-            
-            // Add the new recipe to the array
-            const newRecipe = req.body;
-            
+
             // Validate if all required fields are provided
-            if (!newRecipe.name || !newRecipe.category || !newRecipe.ingredients || !newRecipe.instructions) {
-                return res.status(400).send('Incomplete recipe data. Please provide name, category, ingredients, and instructions.');
-            }  
+            const requiredFields = ['name', 'category', 'ingredients', 'instructions'];
+            for (const field of requiredFields) {
+                if (!req.body[field]) {
+                    return res.status(400).send(`Incomplete recipe data. Please provide ${field}.`);
+                }
+            }
 
             // Add the new recipe to the array with a unique id
-            newRecipe.id = uuidv4(); // Generate a unique id
-            
-            const reorderedRecipe = {
-                id: newRecipe.id,
-                name: newRecipe.name,
-                category: newRecipe.category,
-                ingredients: newRecipe.ingredients,
-                instructions: newRecipe.instructions
+            const newRecipe = {
+                id: uuidv4(), // Generate a unique id
+                ...req.body
             };
-            breakfastRecipes.push(reorderedRecipe);
+
+            breakfastRecipes.push(newRecipe);
 
             // Write the updated recipes back to the file
-            fs.writeFile(breakfastFilePath, JSON.stringify(breakfastRecipes, null, 2), (err) => {
+            fs.writeFile(breakfastFilePath, JSON.stringify(breakfastRecipes, null, 4), (err) => {
                 if (err) {
                     console.error('Error writing breakfast.json:', err);
                     res.status(500).send('Error writing breakfast recipes');
@@ -106,11 +131,59 @@ app.post('/api/breakfast/addNewRecipe', validateUser, (req, res) => {
     });
 });
 
+// Route to modify a recipe
+app.put('/api/breakfast/modify/:name', validateUser, (req, res) => {
+    const recipeName = req.params.name;
 
+    // Read the existing recipes
+    fs.readFile(breakfastFilePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading breakfast.json:', err);
+            res.status(500).send('Error reading breakfast recipes');
+            return;
+        }
 
+        try {
+            // Parse the JSON data
+            const breakfastRecipes = JSON.parse(data);
+
+            // Find the index of the recipe with the given name
+            const recipeIndex = breakfastRecipes.findIndex(recipe => recipe.name === recipeName);
+
+            if (recipeIndex === -1) {
+                return res.status(404).send('The recipe with the given name was not found.');
+            }
+
+            // Update the recipe with the given name
+            const modifiedRecipe = {
+                ...breakfastRecipes[recipeIndex], // Keep existing properties
+                name: req.body.name || breakfastRecipes[recipeIndex].name,
+                category: req.body.category || breakfastRecipes[recipeIndex].category,
+                ingredients: req.body.ingredients || breakfastRecipes[recipeIndex].ingredients,
+                instructions: req.body.instructions || breakfastRecipes[recipeIndex].instructions,
+            };
+
+            // Update the recipe in the array
+            breakfastRecipes[recipeIndex] = modifiedRecipe;
+
+            // Write the updated recipes back to the file
+            fs.writeFile(breakfastFilePath, JSON.stringify(breakfastRecipes, null, 4), (err) => {
+                if (err) {
+                    console.error('Error writing breakfast.json:', err);
+                    res.status(500).send('Error writing breakfast recipes');
+                    return;
+                }
+                res.send(`Recipe "${recipeName}" modified successfully!`);
+            });
+        } catch (error) {
+            console.error('Error parsing breakfast.json:', error);
+            res.status(500).send('Error parsing breakfast recipes');
+        }
+    });
+});
 
 // Route to delete a recipe by its name
-app.delete('/api/breakfast/:name',validateUser, (req, res) => {
+app.delete('/api/breakfast/delete/:name', validateUser, (req, res) => {
     const recipeName = req.params.name;
 
     // Read the existing recipes
@@ -136,7 +209,7 @@ app.delete('/api/breakfast/:name',validateUser, (req, res) => {
             const deletedRecipe = breakfastRecipes.splice(recipeIndex, 1)[0];
 
             // Write the updated recipes back to the file
-            fs.writeFile(breakfastFilePath, JSON.stringify(breakfastRecipes, null, 2), (err) => {
+            fs.writeFile(breakfastFilePath, JSON.stringify(breakfastRecipes, null, 4), (err) => {
                 if (err) {
                     console.error('Error writing breakfast.json:', err);
                     res.status(500).send('Error writing breakfast recipes');
@@ -150,7 +223,6 @@ app.delete('/api/breakfast/:name',validateUser, (req, res) => {
         }
     });
 });
-
 
 //lunch - Kenneth
 app.get('/api/lunch', (req, res) => {
