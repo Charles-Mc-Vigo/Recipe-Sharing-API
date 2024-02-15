@@ -31,7 +31,6 @@ The purpose of this project is to create a platform where users can share their 
 1. Clone the repository:
 2. Install dependencies:
 3. Run the server:
-4. 
 4. Access the API endpoints using Postman or any other API testing tool.
 
 ## API Endpoints
