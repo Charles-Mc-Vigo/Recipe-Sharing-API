@@ -1,0 +1,43 @@
+[
+    {
+      "name": "Donut Ice Cream Sandwiches",
+      "category": "dessert",
+      "ingredients": [
+        "1 maple bacon bar donut",
+        "1/2 cup butter pean ice cream, slightly softened"
+      ],
+      "instructions": "1. Cut maple bacon bar in half, then cut each piece in half horizontally.\n2. Spread the bottom of each bar donut half with butter pecan ice cream.\n3.Place the cut donut tops onto the ice cream.\n4. Serve immediately."
+    },
+    {
+      "name": "Mamon (Sponge Cakes)",
+      "category": "dessert",
+      "ingredients": [
+        "2 1/2 cups all-purpose flour",
+        "1 cup white sugar",
+        "1 tablespoon baking powder",
+        "1 teaspoon salt",
+        "1/2 cup vegetable oil",
+        "8 egg yolks",
+        "2 tablespoons grated orange peel",
+        "1 teaspoon vanilla extract",
+        "1/3 cup orange juice ",
+        "1/3 cup water",
+        "8 egg whites",
+        "1/2 teaspoon cream of tartar",
+        "1/2 cup white sugar"
+      ],
+      "instructions": "1. Stir the flour, 1 cup sugar, baking powder, and salt together in a large bowl.\n2. Make a well in the center of the flour mixture and add the oil, egg yolks, grated orange peel, vanilla extract, orange juice, and water.\n3. Mix well by hand until smooth with no lumps.\n4. Beat the egg whites with the cream of tartar until foamy in a large glass or metal mixing bowl.\n5. Gradually add the 1/2 cup sugar, continuing to beat until soft peaks form.\n6. Lift your beater or whisk straight up: the egg whites will form soft mounds rather than a sharp peak. Fold the flour mixture into the egg whites.\n7. Pour the resulting batter into the prepared muffin cups to about 2/3 full.\n8. Bake in the preheated oven until a toothpick inserted into the center comes out clean, about 40 minutes.\n9. Cool in the pans for 10 minutes before removing to cool completely on a wire rack."
+    },
+    {
+      "name": "Brownies",
+      "category": "dessert",
+      "ingredients": [
+        "2 eggs + water",
+        "Powdered sugar",
+        "Unsweetened cocoa powder",
+        "Oil",
+        "Vanilla Extract"
+      ],
+      "instructions": "1. First, mix together the dry and wet ingredients in two separate bowls.\n2. Next, combine the wet and dry ingredients.\n3. Next, combine the wet and dry ingredients.\n4. Then, pour the batter into an 8×8 inch baking pan lined with parchment paper.\n5. Finally, bake!."
+    }
+  ]
