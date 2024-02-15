@@ -1,6 +1,6 @@
 # Recipe Sharing API
 
-## Group Name: Foodie Connect
+## Group Name: DevGurus
 
 ### Members:
 - Johanna Mae Ferrer
