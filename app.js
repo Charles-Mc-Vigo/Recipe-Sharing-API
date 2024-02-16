@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 app.use(express.json());
+const dataFolderPath = path.join(__dirname, 'data');
 
 app.get('/api',(req,res)=>{
     res.send('Welcome to Recipe Sharing API')
@@ -24,15 +25,15 @@ app.get('/api/dinner',(req,res)=>{
 })
 
 //dessert
-const dataFolderPath = path.join(__dirname, 'Dessert.json');
+const DessertFolderPath = path.join(dataFolderPath, 'Dessert.json');
 
 // Define the route handler
-app.get('/api/Dessert',(req,res)=>{
+app.get('/api/dessert',(req,res)=>{
     res.send('You are in the DESSERT route')
 });
 
 app.get('/api/dessert/Dessert_Menu', (req, res) => {
-    fs.readFile(DessertFilePath, 'utf-8', (err, data) => {
+    fs.readFile(DessertFolderPath, 'utf-8', (err, data) => {
         if (err) {
             console.error('Error reading Dessert file', err);
             return res.status(500).send('Error loading dessert recipe...');
@@ -42,40 +43,52 @@ app.get('/api/dessert/Dessert_Menu', (req, res) => {
     });
 });
 
-app.post('/api/dessert/addNewRecipe',  (req, res) => {
-    const newRecipe = req.body;
-    if (!newRecipe.name || !newRecipe.ingredients || !newRecipe.instructions) {
-        return res.status(400).send('Incomplete recipe data. Please provide name, ingredients, and instructions.');
-    }
-
+app.post('/api/dessert/addNewRecipe', (req, res) => {
     // Read the existing recipes
-    fs.readFile(DessertFilePath, 'utf8', (err, data) => {
+    fs.readFile(DessertFolderPath, 'utf8', (err, data) => {
         if (err) {
-            console.error('Error reading Dessert file:', err);
-            return res.status(500).send('Error loading dessert recipes.');
+            console.error('Error reading Dessert.json:', err);
+            return res.status(500).send('Error reading Dessert recipes');
         }
 
-        let DessertRecipes = [];
         try {
-            DessertRecipes = JSON.parse(data);
-        } catch (error) {
-            console.error('Error parsing Dessert recipes:', error);
-            return res.status(500).send('Error parsing dessert recipes.');
-        }
+            // Parse the JSON data
+            const dessertRecipes = JSON.parse(data);
 
-        // Add the new recipe to the array
-        DessertRecipes.push(newRecipe);
-
-        // Write the updated recipes back to the file
-        fs.writeFile(DessertFilePath, JSON.stringify(DessertRecipes, null, 2), (err) => {
-            if (err) {
-                console.error('Error writing Dessert.json:', err);
-                return res.status(500).send('Error writing dessert recipes.');
+            // Validate if all required fields are provided
+            const requiredFields = ['name', 'category', 'ingredients', 'instructions'];
+            for (const field of requiredFields) {
+                if (!req.body[field]) {
+                    return res.status(400).send(`Incomplete recipe data. Please provide ${field}.`);
+                }
             }
-            res.status(201).send('Recipe added to dessert recipes successfully.');
-        });
+
+            // Construct the new recipe object
+            const newRecipe = {
+                name: req.body.name,
+                category: req.body.category,
+                ingredients: req.body.ingredients,
+                instructions: req.body.instructions
+            };
+
+            // Add the new recipe to the existing recipes
+            dessertRecipes.push(newRecipe);
+
+            // Write the updated recipes back to the file
+            fs.writeFile(DessertFolderPath, JSON.stringify(dessertRecipes, null, 4), (err) => {
+                if (err) {
+                    console.error('Error writing Dessert.json:', err);
+                    return res.status(500).send('Error writing dessert recipes');
+                }
+                res.status(201).send(`${newRecipe.name} added to dessert recipes successfully`);
+            });
+        } catch (error) {
+            console.error('Error parsing dessert.json:', error);
+            res.status(500).send('Error parsing dessert recipes');
+        }
     });
 });
+
 
 //Edit recipe
 app.put('/api/dessert/editRecipe/:recipeId', (req, res) => {
@@ -128,41 +141,40 @@ app.put('/api/dessert/editRecipe/:recipeId', (req, res) => {
 });
 
 // Delete recipe
-app.delete('/api/dessert/deleteRecipe/:recipeId', (req, res) => {
-    const recipeId = req.params.recipeId;
+app.delete('/api/dessert/deleteRecipe/:name', (req, res) => {
+    const recipeName = req.params.name;
 
     // Read the existing recipes
-    fs.readFile(DessertFilePath, 'utf8', (err, data) => {
+    fs.readFile(DessertFolderPath, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading Dessert file:', err);
             return res.status(500).send('Error loading dessert recipes.');
         }
 
-        let DessertRecipes = [];
         try {
-            DessertRecipes = JSON.parse(data);
+            dessertRecipes = JSON.parse(data);
         } catch (error) {
             console.error('Error parsing Dessert recipes:', error);
             return res.status(500).send('Error parsing dessert recipes.');
         }
 
         // Find the index of the recipe to be deleted
-        const recipeIndex = DessertRecipes.findIndex(recipe => recipe.recipeId === parseInt(recipeId));
+        const recipeIndex = dessertRecipes.findIndex(recipe => recipe.name === recipeName);
 
         if (recipeIndex === -1) {
             return res.status(404).send('Recipe not found.');
         }
 
         // Remove the recipe from the array
-        DessertRecipes.splice(recipeIndex, 1);
+        const deletedRecipe = dessertRecipes.splice(recipeIndex, 1)[0];
 
         // Write the updated recipes back to the file
-        fs.writeFile(DessertFilePath, JSON.stringify(DessertRecipes, null, 2), (err) => {
+        fs.writeFile(DessertFolderPath, JSON.stringify(dessertRecipes, null, 2), (err) => {
             if (err) {
                 console.error('Error writing Dessert.json:', err);
                 return res.status(500).send('Error writing dessert recipes.');
             }
-            res.status(200).send('Recipe deleted successfully.');
+            res.send(`Recipe "${deletedRecipe.name}" deleted successfully!`);
         });
     });
 });
