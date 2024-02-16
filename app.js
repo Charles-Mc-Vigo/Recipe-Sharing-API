@@ -229,10 +229,7 @@ app.delete('/api/breakfast/delete/:name', validateUser, (req, res) => {
 const DinnerFilePath = path.join(dataFolderPath, 'Dinner.json');
 
 // Define the route handler
-app.get('/api/dinner', (req, res) => {
-    res.send('You are in the Dinner route');    
-});
-app.get('/api/dinner/dinner_Menu', (req, res) => {
+app.get('/api/dinner/dinner_Menu', validateUser,(req, res) => {
     fs.readFile(DinnerFilePath, 'utf-8', (err, data) => {
         if (err) {
             console.error('Error reading Dinner file', err);
@@ -243,7 +240,7 @@ app.get('/api/dinner/dinner_Menu', (req, res) => {
     });
 });
 
-app.post('/api/dinner/addNewRecipe',  (req, res) => {
+app.post('/api/dinner/addNewRecipe', validateUser, (req, res) => {
     const newRecipe = req.body;
     if (!newRecipe.name || !newRecipe.ingredients || !newRecipe.instructions) {
         return res.status(400).send('Incomplete recipe data. Please provide name, ingredients, and instructions.');
@@ -280,7 +277,7 @@ app.post('/api/dinner/addNewRecipe',  (req, res) => {
 
 
 //Edit recipe
-app.put('/api/dinner/editRecipe/:recipeId', (req, res) => {
+app.put('/api/dinner/editRecipe/:recipeId', validateUser, (req, res) => {
     const recipeId = req.params.recipeId;
     const updatedRecipe = req.body;
 
@@ -330,7 +327,7 @@ app.put('/api/dinner/editRecipe/:recipeId', (req, res) => {
 });
 
 // Delete recipe
-app.delete('/api/dinner/deleteRecipe/:recipeId', (req, res) => {
+app.delete('/api/dinner/deleteRecipe/:recipeId', validateUser, (req, res) => {
     const recipeId = req.params.recipeId;
 
     // Read the existing recipes
@@ -373,12 +370,7 @@ app.delete('/api/dinner/deleteRecipe/:recipeId', (req, res) => {
 //dessert
 const DessertFolderPath = path.join(dataFolderPath, 'Dessert.json');
 
-// Define the route handler
-app.get('/api/dessert',(req,res)=>{
-    res.send('You are in the DESSERT route')
-});
-
-app.get('/api/dessert/Dessert_Menu', (req, res) => {
+app.get('/api/dessert/Dessert_Menu', validateUser, (req, res) => {
     fs.readFile(DessertFolderPath, 'utf-8', (err, data) => {
         if (err) {
             console.error('Error reading Dessert file', err);
@@ -389,7 +381,7 @@ app.get('/api/dessert/Dessert_Menu', (req, res) => {
     });
 });
 
-app.post('/api/dessert/addNewRecipe', (req, res) => {
+app.post('/api/dessert/addNewRecipe', validateUser, (req, res) => {
     // Read the existing recipes
     fs.readFile(DessertFolderPath, 'utf8', (err, data) => {
         if (err) {
@@ -437,7 +429,7 @@ app.post('/api/dessert/addNewRecipe', (req, res) => {
 
 
 //Edit recipe
-app.put('/api/dessert/editRecipe/:recipeId', (req, res) => {
+app.put('/api/dessert/editRecipe/:recipeId', validateUser,(req, res) => {
     const recipeId = req.params.recipeId;
     const updatedRecipe = req.body;
 
@@ -487,7 +479,7 @@ app.put('/api/dessert/editRecipe/:recipeId', (req, res) => {
 });
 
 // Delete recipe
-app.delete('/api/dessert/deleteRecipe/:name', (req, res) => {
+app.delete('/api/dessert/deleteRecipe/:name', validateUser, (req, res) => {
     const recipeName = req.params.name;
 
     // Read the existing recipes
@@ -527,9 +519,6 @@ app.delete('/api/dessert/deleteRecipe/:name', (req, res) => {
 
 const lunchFilePath = path.join(dataFolderPath, 'lunch.json');
 //lunch
-app.get('/', (req, res) => {
-    res.send('You are in the Lunch route');    
-});
 
 app.get('/api/lunch', validateUser, (req, res) => {
 
@@ -695,8 +684,6 @@ app.delete('/api/lunch/deleteRecipe/:recipeId', validateUser, (req, res) => {
         });
     });
 });
-
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
