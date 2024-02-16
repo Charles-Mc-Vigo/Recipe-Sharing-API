@@ -523,11 +523,13 @@ app.delete('/api/dessert/deleteRecipe/:name', (req, res) => {
             res.send(`Recipe "${deletedRecipe.name}" deleted successfully!`);
         });
     });
+});
 
 //lunch - Myca
 app.get('/api/lunch', (req, res) => {
     res.send('You are in the LUNCH route');
 });
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
