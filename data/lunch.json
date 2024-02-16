@@ -1,0 +1,44 @@
+[
+  {
+    "recipeId": 1,
+    "name": "Ginataang Gulay",
+    "category": "Lunch",
+    "ingredients": [
+      "Kalabasa",
+      "Sitaw",
+      "Pork",
+      "Shrimp",
+      "Onion",
+      "Garlic",
+      "Gata"
+    ],
+    "instructions": "1.Boil water in a pan, add pork. Cover and cook to medium high heat for 20mins. \n2.Remove the pork from the pan, set aside.Reserve the water. \n3.Heat oil in a pan. Saute onion and garlic. and boiled pork and saute. \n4. Add the gata with water used broth. \n5. Add the squash and cover. \n6. Add the shrimp and string beans and wait to 5 to 7 mins. And done.  "
+  },
+  {
+    "recipeId": 2,
+    "name": "Butter Shrimp",
+    "category": "Lunch",
+    "ingredients": [
+      "Shrimp",
+      "Garlic",
+      "Butter",
+      "lemon",
+      "salt and pepper"
+    ],
+    "instructions": "1.Marinate the shrimp in lemon for about 10mins. \n2. Melt the butter in a pan. \n3.Add the garlic, cook in a low heat until brown. \n4.Put the shrimp, adjust the heat to high until its orange. \n5.Season with pepper and salt and lemon juice.Stir. \n6.and Add parsley. and cook for 30s."
+  },
+  {
+    "recipeId": 3,
+    "name": "Pork Adobobo ka",
+    "category": "Lunch",
+    "ingredients": [
+      "pork belly",
+      "Garlic",
+      "bay leaves",
+      "vinegar",
+      "soy sauce",
+      "salt and pepper"
+    ],
+    "instructions": "1.Combine pork belly, soy sauce, and garlic then marinate for at least 1 hr. \n2.Heat the pot and put in the marinated pork belly and cook for a few mins.\n3.Pour remaining marinade including garlic. \n4. Add water, whole pepper and dried bay leave then boil for 40 mins. \n5. Put-in the vinegar and simmer for 15mins. \n6.Salt to tase and serve."
+  }
+]
