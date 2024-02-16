@@ -1,26 +1,3 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
-app.use(express.json());
-
-const dataFolderPath = path.join(__dirname, 'data');
-
-
-function authenticateUser(username, password) {
-    return username === 'admin' && password === 'admin';
-}
-
-function validateUser(req, res, next){
-    const{ username, password} = req.headers;
-
-    if (!username || !password){
-        return res.status(401).send('Authentication required. Please provide username and password');
-    }
-    next();
-}
-
 const lunchFilePath = path.join(dataFolderPath, 'lunch.json');
 
 //lunch
@@ -29,7 +6,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/lunch', validateUser, (req, res) => {
-   
+
     fs.readFile(lunchFilePath, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading lunch.json:', err);
@@ -191,25 +168,4 @@ app.delete('/api/lunch/deleteRecipe/:recipeId', validateUser, (req, res) => {
             res.status(200).send('Recipe deleted successfully.');
         });
     });
-});
-
-
-
-
-
-//dinner
-app.get('/api/dinner',(req,res)=>{
-    res.send('You are in the DINNER route')
-})
-
-//dessert
-app.get('/api/dessert',(req,res)=>{
-    res.send('You are in the DESSERT route')
-})
-
-
-//port
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
 });
