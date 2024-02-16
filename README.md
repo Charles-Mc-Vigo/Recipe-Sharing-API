@@ -29,8 +29,11 @@ The purpose of this project is to create a platform where users can share their 
 
 ## Setup
 1. Clone the repository:
+- git clone https://github.com/Charles-Mc-Vigo/Recipe-Sharing-API.git
 2. Install dependencies:
+- npm install express nodemon
 3. Run the server:
+-nodemon app.js
 4. Access the API endpoints using Postman or any other API testing tool.
 
 ## API Endpoints
@@ -44,18 +47,16 @@ The purpose of this project is to create a platform where users can share their 
 - **GET /api/lunch**: Get all lunch recipes.
 - **GET /api/lunch/:name**: Get a specific lunch recipe by name.
 - **POST /api/lunch/addNewRecipe**: Add a new lunch recipe.
-- **PUT /api/lunch/modify/:name**: Modify an existing lunch recipe.
-- **DELETE /api/lunch/delete/:name**: Delete a lunch recipe by name.
-- **GET /api/dinner**: Get all dinner recipes.
-- **GET /api/dinner/:name**: Get a specific dinner recipe by name.
+- **PUT /api/lunch/editRecipe/:recipeId**: Modify an existing lunch recipe.
+- **DELETE /api/lunch/deleteRecipe/:recipeId**: Delete a lunch recipe by name.
+- **GET /api/dinner/dinner_Menu**: Get all dinner recipes.
 - **POST /api/dinner/addNewRecipe**: Add a new dinner recipe.
-- **PUT /api/dinner/modify/:name**: Modify an existing dinner recipe.
-- **DELETE /api/dinner/delete/:name**: Delete a dinner recipe by name.
-- **GET /api/dessert**: Get all dessert recipes.
-- **GET /api/dessert/:name**: Get a specific dessert recipe by name.
+- **PUT /api/dinner/editRecipe/:recipeId**: Modify an existing dinner recipe.
+- **DELETE /api/dinner/deleteRecipe/:recipeId**: Delete a dinner recipe by name.
+- **GET /api/dessert/Dessert_Menu**: Get all dessert recipes.
 - **POST /api/dessert/addNewRecipe**: Add a new dessert recipe.
-- **PUT /api/dessert/modify/:name**: Modify an existing dessert recipe.
-- **DELETE /api/dessert/delete/:name**: Delete a dessert recipe by name.
+- **PUT /api/dessert/editRecipe/:recipeId**: Modify an existing dessert recipe.
+- **DELETE /api/dessert/deleteRecipe/:name**: Delete a dessert recipe by name.
 
-##Undone
+
 
